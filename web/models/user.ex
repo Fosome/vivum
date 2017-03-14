@@ -25,5 +25,15 @@ defmodule Vivum.User do
     |> cast(params, [:password])
     |> validate_required([:password])
     |> validate_confirmation(:password, required: true)
+    |> hash_password()
+  end
+
+  defp hash_password(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+      _ ->
+        changeset
+    end
   end
 end

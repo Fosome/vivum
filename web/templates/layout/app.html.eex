@@ -15,6 +15,10 @@
     <div class="container">
       <header>
         <h1>Vivum</h1>
+
+        <ul>
+          <li><%= link "Sign Up", to: user_path(@conn, :new) %></li>
+        </ul>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

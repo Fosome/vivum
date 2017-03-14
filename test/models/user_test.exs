@@ -69,4 +69,34 @@ defmodule Vivum.UserTest do
     refute changeset.valid?
     assert {:password_confirmation, {"does not match confirmation", [validation: :confirmation]}} in changeset.errors
   end
+
+  test "registration changeset will hash the password" do
+    changeset = User.registration_changeset(
+      %User{},
+      %{
+        username:              "mcribs",
+        email:                 "mcribs@host.com",
+        password:              "secr3t",
+        password_confirmation: "secr3t"
+      }
+    )
+
+    assert changeset.valid?
+    refute get_field(changeset, :password_hash) == nil
+  end
+
+  test "registration changeset will not hash the password for invalid changes" do
+    changeset = User.registration_changeset(
+      %User{},
+      %{
+        username:              "mcribs",
+        email:                 "mcribs@host.com",
+        password:              "secr3t",
+        password_confirmation: "nope"
+      }
+    )
+
+    refute changeset.valid?
+    assert get_field(changeset, :password_hash) == nil
+  end
 end
