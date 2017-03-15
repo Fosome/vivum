@@ -11,8 +11,9 @@ defmodule Vivum.UserController do
     changeset = User.registration_changeset(%User{}, params)
 
     case Repo.insert(changeset) do
-      {:ok, _user} ->
+      {:ok, user} ->
         conn
+        |> Vivum.Auth.login(user)
         |> put_flash(:info, "Success")
         |> redirect(to: page_path(conn, :index))
       {:error, changeset} ->

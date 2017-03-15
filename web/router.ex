@@ -7,6 +7,7 @@ defmodule Vivum.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Vivum.Auth
   end
 
   pipeline :api do
@@ -16,9 +17,10 @@ defmodule Vivum.Router do
   scope "/", Vivum do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
-
+    get "/",        PageController, :index
     get "/sign_up", UserController, :new
+
+    resources "/sessions", SessionController, only: [:new, :create, :delete]
 
     resources "/users", UserController, only: [:create]
   end

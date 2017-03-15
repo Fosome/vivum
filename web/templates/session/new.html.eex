@@ -1,0 +1,18 @@
+<h2>Sign In</h2>
+
+<%= form_for @conn, session_path(@conn, :create), [as: :session], fn f -> %>
+  <div>
+    Username<br />
+    <%= text_input f, :username %>
+    <%= error_tag f, :username %>
+  </div>
+  <div>
+    Password<br />
+    <%= password_input f, :password %>
+    <%= error_tag f, :password %>
+  </div>
+
+  <div>
+    <%= submit "Sign In" %>
+  </div>
+<% end %>
