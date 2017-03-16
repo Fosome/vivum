@@ -1,6 +1,6 @@
-<h2>New Plant</h2>
+<h2>Edit Plant</h2>
 
-<%= form_for @changeset, plant_path(@conn, :create), fn f -> %>
+<%= form_for @changeset, plant_path(@conn, :update, @plant), fn f -> %>
   <div>
     Name<br />
     <%= text_input f, :name %>
@@ -13,10 +13,10 @@
   </div>
 
   <div>
-    <%= submit "Create" %>
+    <%= submit "Update" %>
   </div>
 <% end %>
 
 <div>
-  <%= link "Cancel", to: plant_path(@conn, :index) %>
+  <%= link "Cancel", to: plant_path(@conn, :show, @plant) %>
 </div>

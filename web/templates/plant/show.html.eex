@@ -6,4 +6,11 @@
   <%= @plant.description %>
 </p>
 
-<%= link "< Back", to: plant_path(@conn, :index) %>
+<ul>
+  <li><%= link "Edit", to: plant_path(@conn, :edit, @plant) %></li>
+  <li><%= link "Delete", to: plant_path(@conn, :delete, @plant), method: :delete %></li>
+</ul>
+
+<div>
+  <%= link "< Back", to: plant_path(@conn, :index) %>
+</div>

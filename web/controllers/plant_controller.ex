@@ -13,7 +13,7 @@ defmodule Vivum.PlantController do
 
   def show(conn, %{"id" => id}, current_user) do
     plant_query = Ecto.assoc(current_user, :plants)
-    plant = Repo.get(plant_query, id)
+    plant       = Repo.get(plant_query, id)
 
     render conn, "show.html", plant: plant
   end
@@ -43,6 +43,42 @@ defmodule Vivum.PlantController do
         |> put_flash(:error, "There were errors")
         |> render("new.html", changeset: changeset)
     end
+  end
+
+  def edit(conn, %{"id" => id}, current_user) do
+    plant_query = Ecto.assoc(current_user, :plants)
+    plant       = Repo.get(plant_query, id)
+    changeset   = Plant.changeset(plant)
+
+    render conn, "edit.html", changeset: changeset, plant: plant
+  end
+
+  def update(conn, %{"id" => id, "plant" => plant_params}, current_user) do
+    plant_query = Ecto.assoc(current_user, :plants)
+    plant       = Repo.get(plant_query, id)
+    changeset   = Plant.changeset(plant, plant_params)
+
+    case Repo.update(changeset) do
+      {:ok, plant} ->
+        conn
+        |> put_flash(:info, "Success")
+        |> redirect(to: plant_path(conn, :show, plant))
+      {:error, changeset} ->
+        conn
+        |> put_flash(:error, "There were errors")
+        |> render("edit.html", plant: plant, changeset: changeset)
+    end
+  end
+
+  def delete(conn, %{"id" => id}, current_user) do
+    plant_query = Ecto.assoc(current_user, :plants)
+    plant       = Repo.get(plant_query, id)
+
+    Repo.delete!(plant)
+
+    conn
+    |> put_flash(:info, "Success")
+    |> redirect(to: plant_path(conn, :index))
   end
 
   def action(conn, _) do
