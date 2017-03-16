@@ -1,18 +1,21 @@
 <h2>My Plants</h2>
 
-<ul>
-  <li><%= link "New Plant", to: plant_path(@conn, :new) %></li>
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <%= link "New Plant", to: plant_path(@conn, :new), class: "nav-link" %>
+  </li>
 </ul>
-
 
 <%= if Enum.empty?(@plants) do %>
   <p>
     No plants yet. <%= link "Add a new plant", to: plant_path(@conn, :new) %>.
   </p>
 <% else %>
-  <ul>
+  <ul class="list-group">
     <%= for plant <- @plants do %>
-      <li><%= link plant.name, to: plant_path(@conn, :show, plant)  %></li>
+      <li class="list-group-item">
+        <%= link plant.name, to: plant_path(@conn, :show, plant) %>
+      </li>
     <% end %>
   </ul>
 <% end %>

@@ -1,0 +1,15 @@
+@import "bootstrap";
+
+$danger-red: #d9534f;
+
+.app-header {
+  margin: 16px 0;
+
+  a:hover {
+    text-decoration: none;
+  }
+}
+
+.form-control-error {
+  color: $danger-red;
+}

@@ -1,22 +1,19 @@
 <h2>Edit Plant</h2>
 
 <%= form_for @changeset, plant_path(@conn, :update, @plant), fn f -> %>
-  <div>
-    Name<br />
-    <%= text_input f, :name %>
+  <div class="form-group">
+    <label>Name</label>
+    <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
-  <div>
-    Description<br />
-    <%= textarea f, :description %>
+  <div class="form-group">
+    <label>Description</label>
+    <%= textarea f, :description, rows: 6, class: "form-control" %>
     <%= error_tag f, :description %>
   </div>
 
-  <div>
-    <%= submit "Update" %>
+  <div class="form-group">
+    <%= submit "Update", class: "btn btn-primary" %>
+    <%= link "Cancel", to: plant_path(@conn, :show, @plant), class: "btn" %>
   </div>
 <% end %>
-
-<div>
-  <%= link "Cancel", to: plant_path(@conn, :show, @plant) %>
-</div>

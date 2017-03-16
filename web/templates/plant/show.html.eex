@@ -1,3 +1,12 @@
+<ul class="nav justify-content-end">
+  <li class="nav-item">
+    <%= link "Edit", to: plant_path(@conn, :edit, @plant), class: "nav-link" %>
+  </li>
+  <li class="nav-item">
+    <%= link "Delete", to: plant_path(@conn, :delete, @plant), method: :delete, class: "nav-link" %>
+  </li>
+</ul>
+
 <h2>
   <%= @plant.name %>
 </h2>
@@ -5,12 +14,3 @@
 <p>
   <%= @plant.description %>
 </p>
-
-<ul>
-  <li><%= link "Edit", to: plant_path(@conn, :edit, @plant) %></li>
-  <li><%= link "Delete", to: plant_path(@conn, :delete, @plant), method: :delete %></li>
-</ul>
-
-<div>
-  <%= link "< Back", to: plant_path(@conn, :index) %>
-</div>
