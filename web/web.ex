@@ -36,6 +36,8 @@ defmodule Vivum.Web do
 
       import Vivum.Router.Helpers
       import Vivum.Gettext
+
+      import Vivum.Auth, only: [authenticate: 2]
     end
   end
 

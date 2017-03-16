@@ -22,7 +22,8 @@ defmodule Vivum.Router do
 
     resources "/sessions", SessionController, only: [:new, :create, :delete]
 
-    resources "/users", UserController, only: [:create]
+    resources "/users",  UserController,  only: [:create]
+    resources "/plants", PlantController, only: [:index, :show, :new, :create]
   end
 
   # Other scopes may use custom stacks.

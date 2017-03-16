@@ -1,0 +1,9 @@
+<h2>
+  <%= @plant.name %>
+</h2>
+
+<p>
+  <%= @plant.description %>
+</p>
+
+<%= link "< Back", to: plant_path(@conn, :index) %>

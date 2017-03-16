@@ -1,0 +1,18 @@
+<h2>My Plants</h2>
+
+<ul>
+  <li><%= link "New Plant", to: plant_path(@conn, :new) %></li>
+</ul>
+
+
+<%= if Enum.empty?(@plants) do %>
+  <p>
+    No plants yet. <%= link "Add a new plant", to: plant_path(@conn, :new) %>.
+  </p>
+<% else %>
+  <ul>
+    <%= for plant <- @plants do %>
+      <li><%= link plant.name, to: plant_path(@conn, :show, plant)  %></li>
+    <% end %>
+  </ul>
+<% end %>
