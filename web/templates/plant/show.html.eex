@@ -11,6 +11,12 @@
   <%= @plant.name %>
 </h2>
 
+<%= if @plant.photo do %>
+  <div>
+    <%= img_tag Vivum.PlantPhoto.url({@plant.photo, @plant}, :normal) %>
+  </div>
+<% end %>
+
 <p>
   <%= @plant.description %>
 </p>

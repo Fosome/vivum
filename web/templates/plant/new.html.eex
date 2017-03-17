@@ -1,11 +1,18 @@
 <h2>New Plant</h2>
 
-<%= form_for @changeset, plant_path(@conn, :create), fn f -> %>
+<%= form_for @changeset, plant_path(@conn, :create), [multipart: true], fn f -> %>
   <div class="form-group">
     <label>Name</label>
     <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
+
+  <div class="form-group">
+    <label>Photo</label>
+    <%= file_input f, :photo, class: "form-control" %>
+    <%= error_tag f, :photo %>
+  </div>
+
   <div class="form-group">
     <label>Description</label>
     <%= textarea f, :description, rows: 6, class: "form-control" %>

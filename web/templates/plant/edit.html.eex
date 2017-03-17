@@ -1,11 +1,29 @@
 <h2>Edit Plant</h2>
 
-<%= form_for @changeset, plant_path(@conn, :update, @plant), fn f -> %>
+<%= form_for @changeset, plant_path(@conn, :update, @plant), [multipart: true], fn f -> %>
   <div class="form-group">
     <label>Name</label>
     <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
+
+  <div class="form-group">
+    <label>Photo</label>
+    <div class="form-control">
+      <%= file_input f, :photo %>
+      <%= error_tag f, :photo %>
+
+      <%= if @plant.photo do %>
+        <div>
+          <p>Current:</p>
+          <div>
+            <%= img_tag Vivum.PlantPhoto.url({@plant.photo, @plant}, :thumbnail) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
   <div class="form-group">
     <label>Description</label>
     <%= textarea f, :description, rows: 6, class: "form-control" %>

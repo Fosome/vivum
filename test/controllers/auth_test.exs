@@ -80,10 +80,9 @@ defmodule Vivum.AuthTest do
       password_confirmation: "secr3t"
     }
 
-    user =
-      %User{}
-      |> User.registration_changeset(user_attrs)
-      |> Repo.insert!()
+    %User{}
+    |> User.registration_changeset(user_attrs)
+    |> Repo.insert!()
 
     {status, conn} = Auth.login_by_username_and_password(conn, "mcribs", "secr3t")
 
