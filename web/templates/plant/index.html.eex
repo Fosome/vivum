@@ -6,16 +6,18 @@
   </li>
 </ul>
 
-<%= if Enum.empty?(@plants) do %>
+<%= if @paginator.total_entries == 0 do %>
   <p>
     No plants yet. <%= link "Add a new plant", to: plant_path(@conn, :new) %>.
   </p>
 <% else %>
   <ul class="list-group">
-    <%= for plant <- @plants do %>
+    <%= for plant <- @paginator.entries do %>
       <li class="list-group-item">
         <%= link plant.name, to: plant_path(@conn, :show, plant) %>
       </li>
     <% end %>
   </ul>
+
+  <%= pagination_links @paginator %>
 <% end %>

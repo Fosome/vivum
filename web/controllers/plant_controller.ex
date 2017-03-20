@@ -4,11 +4,11 @@ defmodule Vivum.PlantController do
 
   plug :authenticate
 
-  def index(conn, _params, current_user) do
+  def index(conn, params, current_user) do
     plant_query = Ecto.assoc(current_user, :plants)
-    plants      = Repo.all(plant_query)
+    paginator   = Repo.paginate(plant_query, params)
 
-    render conn, "index.html", plants: plants
+    render conn, "index.html", paginator: paginator
   end
 
   def show(conn, %{"id" => id}, current_user) do

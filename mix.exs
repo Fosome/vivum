@@ -30,7 +30,8 @@ defmodule Vivum.Mixfile do
         :gettext,
         :phoenix_ecto,
         :postgrex,
-        :arc_ecto
+        :arc_ecto,
+        :scrivener_ecto
       ]
     ]
   end
@@ -55,7 +56,9 @@ defmodule Vivum.Mixfile do
      {:comeonin, "~> 3.0"},
      {:uuid, "~> 1.1"},
      {:arc, "~> 0.7.0"},
-     {:arc_ecto, "~> 0.6.0"}
+     {:arc_ecto, "~> 0.6.0"},
+     {:scrivener_ecto, "~> 1.1"},
+     {:scrivener_html, "~> 1.6"}
    ]
   end
 

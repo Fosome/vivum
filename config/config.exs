@@ -26,6 +26,10 @@ config :logger, :console,
 config :arc,
   storage: Arc.Storage.Local
 
+# Config Scrivener for pagination
+config :scrivener_html,
+  view_style: :bootstrap_v4
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
