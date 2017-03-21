@@ -8,17 +8,22 @@ defmodule Vivum.Plant do
     field :uuid,        :string
     field :photo,       Vivum.PlantPhoto.Type
 
-    belongs_to :user, Vivum.User
+    belongs_to :user,    Vivum.User
+    belongs_to :binomen, Vivum.Binomen
 
     timestamps()
   end
 
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, [:name, :description])
+    |> cast(params, [:name, :description, :binomen_id])
     |> generate_uuid()
     |> cast_attachments(params, [:photo])
     |> validate_required([:user_id, :name])
+  end
+
+  def alphabetical(query) do
+    from r in query, order_by: r.name
   end
 
 

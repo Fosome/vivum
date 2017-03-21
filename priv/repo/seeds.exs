@@ -57,17 +57,69 @@ end
 alice = Repo.get_by(Vivum.User, username: "alice")
 
 
+### Binomina (scientific names)
+
+binomina = [
+  %{
+    genus_name:   "euphorbia",
+    species_name: "trigona"
+  },
+  %{
+    genus_name:   "sedum",
+    species_name: "morganianum"
+  },
+  %{
+    genus_name:   "aloe",
+    species_name: "ferox"
+  },
+  %{
+    genus_name:   "adenium",
+    species_name: "obesum"
+  },
+  %{
+    genus_name:   "euphorbia",
+    species_name: "lactea"
+  },
+  %{
+    genus_name:   "sedum",
+    species_name: "sarmentosum"
+  },
+  %{
+    genus_name:   "sempervivum",
+    species_name: "tectorum"
+  },
+  %{
+    genus_name:   "crassula",
+    species_name: "ovata"
+  },
+  %{
+    genus_name:   "sansevieria",
+    species_name: "trifasciata"
+  },
+  %{
+    genus_name:   "euphorbia",
+    species_name: "tirucalli"
+  }
+]
+
+Enum.each binomina, fn %{genus_name: genus, species_name: species} = params ->
+  Repo.get_by(Vivum.Binomen, genus_name: genus, species_name: species) ||
+    %Vivum.Binomen{}
+    |> Vivum.Binomen.changeset(params)
+    |> Repo.insert!()
+end
+
+
 ### Plants
 
 plant_names = [
   "African Milk Tree",
   "Burro's Tail",
-  "Cactus Pear",
-  "Day Flower",
-  "Easter Cactus",
+  "Cape Aloe",
+  "Desert Rose",
+  "Elkhorn",
   "Gold moss",
-  "Haworthia",
-  "Irish Ivy",
+  "Hens and chicks",
   "Jade Tree",
   "Kiwi Aeonium",
   "Lace Aloe",
@@ -78,8 +130,7 @@ plant_names = [
   "Ruby glow",
   "Saguaro Cactus",
   "Toad Cactus",
-  "Wax agave",
-  "Zebra plant"
+  "Wax agave"
 ]
 
 Enum.each plant_names, fn name ->

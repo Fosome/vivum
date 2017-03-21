@@ -2,19 +2,25 @@
 
 <%= form_for @changeset, plant_path(@conn, :create), [multipart: true], fn f -> %>
   <div class="form-group">
-    <label>Name</label>
+    <%= label f, :name, class: "control-label" %>
     <%= text_input f, :name, class: "form-control" %>
     <%= error_tag f, :name %>
   </div>
 
   <div class="form-group">
-    <label>Photo</label>
+    <%= label f, :binomen_id, "Binomial" %>
+    <%= select f, :binomen_id, binomen_options(@binomina), prompt: "Not Sure", class: "form-control" %>
+    <%= error_tag f, :binomen_id %>
+  </div>
+
+  <div class="form-group">
+    <%= label f, :photo %>
     <%= file_input f, :photo, class: "form-control" %>
     <%= error_tag f, :photo %>
   </div>
 
   <div class="form-group">
-    <label>Description</label>
+    <%= label f, :description %>
     <%= textarea f, :description, rows: 6, class: "form-control" %>
     <%= error_tag f, :description %>
   </div>
