@@ -20,7 +20,11 @@
       </header>
 
       <nav>
-        <ul class="nav justify-content-end">
+        <ul class="nav nav-pills justify-content-end">
+          <li class="nav-item">
+            <%= link "Search Plants", to: search_path(@conn, :new), class: "nav-link active" %>
+          </li>
+
           <%= if @current_user do %>
             <li class="nav-item">
               <span class="nav-link">

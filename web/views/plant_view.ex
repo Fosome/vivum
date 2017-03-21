@@ -16,4 +16,8 @@ defmodule Vivum.PlantView do
       }
     end)
   end
+
+  def owner?(conn, plant) do
+    plant.user == conn.assigns[:current_user]
+  end
 end

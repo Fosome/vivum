@@ -3,7 +3,7 @@ defmodule Vivum.PlantController do
   alias Vivum.Plant
   alias Vivum.Binomen
 
-  plug :authenticate
+  plug :authenticate  when action in [:index, :new, :create, :edit, :update, :delete]
   plug :load_binomina when action in [:new, :create, :edit, :update]
 
   def index(conn, params, current_user) do
@@ -17,11 +17,10 @@ defmodule Vivum.PlantController do
     render conn, "index.html", paginator: paginator
   end
 
-  def show(conn, %{"id" => id}, current_user) do
-    plant_query = Ecto.assoc(current_user, :plants)
-
+  def show(conn, %{"id" => id}, _current_user) do
     plant =
-      Repo.get(plant_query, id)
+      Repo.get(Plant,  id)
+      |> Repo.preload(:user)
       |> Repo.preload(:binomen)
 
     render conn, "show.html", plant: plant

@@ -1,21 +1,27 @@
-<ul class="nav justify-content-end">
-  <li class="nav-item">
-    <%= link "Edit", to: plant_path(@conn, :edit, @plant), class: "nav-link" %>
-  </li>
-  <li class="nav-item">
-    <%= link "Delete", to: plant_path(@conn, :delete, @plant), method: :delete, class: "nav-link" %>
-  </li>
-</ul>
+<%= if owner?(@conn, @plant) do %>
+  <ul class="nav justify-content-end">
+    <li class="nav-item">
+      <%= link "Edit", to: plant_path(@conn, :edit, @plant), class: "nav-link" %>
+    </li>
+    <li class="nav-item">
+      <%= link "Delete", to: plant_path(@conn, :delete, @plant), method: :delete, class: "nav-link" %>
+    </li>
+  </ul>
+<% end %>
 
 <h2>
   <%= @plant.name %>
 </h2>
 
 <%= if @plant.binomen do %>
-  <p>
+  <h6>
     <%= binomen_name(@plant.binomen) %>
-  <p>
+  </h6>
 <% end %>
+
+<p>
+  Owner: <%= @plant.user.username %>
+</p>
 
 <%= if @plant.photo do %>
   <div>

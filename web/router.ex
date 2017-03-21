@@ -24,6 +24,9 @@ defmodule Vivum.Router do
 
     resources "/users",  UserController,  only: [:create]
     resources "/plants", PlantController
+
+    get "/search/new",     SearchController, :new
+    get "/search/results", SearchController, :show
   end
 
   # Other scopes may use custom stacks.
