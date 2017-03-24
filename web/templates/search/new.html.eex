@@ -2,7 +2,12 @@
 
 <%= form_for @conn, search_path(@conn, :show), [method: :get, as: :search], fn f -> %>
   <div class="form-group">
-    <%= text_input f, :query, class: "form-control" %>
+    <%= text_input f, :query, placeholder: "Search...", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= label :binomen_id, "Binomen" %>
+    <%= select f, :binomen_id, binomen_options(@binomina), prompt: "Any", class: "form-control" %>
   </div>
 
   <div class="form-group">

@@ -6,6 +6,11 @@
   </div>
 
   <div class="form-group">
+    <%= label :binomen_id, "Binomen" %>
+    <%= select f, :binomen_id, binomen_options(@binomina), prompt: "Any", class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <%= submit "Search", class: "btn btn-primary" %>
   </div>
 <% end %>
